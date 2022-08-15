@@ -3,8 +3,8 @@
     <div class="col-md-4 col-sm-6 col-xs-11 col">
       <div class="signup-form">
         <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" novalidate>
-          <h2>Sign Up</h2>
-          <p>Please fill in this form to create an account!</p>
+          <h2>{{ fields_label.form.title }}</h2>
+          <p>{{ fields_label.form.sub_title }}</p>
           <hr />
           <div class="form-group">
             <div class="row">
@@ -14,7 +14,7 @@
                   class="form-control"
                   name="firstName"
                   id="firstName"
-                  [placeholder]="error_msg.first_name.label"
+                  [placeholder]="fields_label.first_name.label"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
@@ -31,7 +31,7 @@
                   class="alert alert-danger mt-2 font-14"
                   role="alert"
                 >
-                  {{ error_msg.first_name.error }}
+                  {{ fields_label.first_name.error }}
                 </div>
               </div>
               <div class="col">
@@ -40,7 +40,7 @@
                   class="form-control"
                   name="lastName"
                   id="lastName"
-                  [placeholder]="error_msg.last_name.label"
+                  [placeholder]="fields_label.last_name.label"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
@@ -54,7 +54,7 @@
                   class="alert alert-danger mt-2 font-14"
                   role="alert"
                 >
-                  {{ error_msg.last_name.error }}
+                  {{ fields_label.last_name.error }}
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@
               class="form-control"
               name="email"
               id="email"
-              [placeholder]="error_msg.email.label"
+              [placeholder]="fields_label.email.label"
               pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               required
               ngModel
@@ -76,7 +76,7 @@
               class="alert alert-danger mt-2 font-14"
               role="alert"
             >
-              {{ error_msg.email.error }}
+              {{ fields_label.email.error }}
             </div>
           </div>
           <div class="form-group">
@@ -85,7 +85,7 @@
               class="form-control"
               name="password"
               id="password"
-              [placeholder]="error_msg.password.label"
+              [placeholder]="fields_label.password.label"
               required
               ngModel
               #password="ngModel"
@@ -98,9 +98,9 @@
               class="alert alert-danger mt-2 font-14"
               role="alert"
             >
-              {{ error_msg.password.error }}
+              {{ fields_label.password.error }}
               <ul class="list font-weight-light">
-                <li *ngFor="let errorItems of error_msg.password.error_list">
+                <li *ngFor="let errorItems of fields_label.password.error_list">
                   {{ errorItems }}
                 </li>
               </ul>
@@ -114,7 +114,7 @@
                   password?.value?.indexOf(lastName.value) >= 0)
               "
             >
-              {{ error_msg.password.no_name_error }}
+              {{ fields_label.password.no_name_error }}
             </div>
           </div>
           <div class="form-group">
@@ -139,7 +139,7 @@
               class="alert alert-danger mt-2 font-14"
               role="alert"
             >
-              {{ error_msg.password.error }}
+              {{ fields_label.password.error }}
             </div>
             <div
               class="alert alert-danger mt-2 font-14"
@@ -149,7 +149,7 @@
                 confirmPassword.value !== password.value
               "
             >
-              {{ error_msg.password.confirm_password }}
+              {{ fields_label.password.confirm_password }}
             </div>
           </div>
           <div
@@ -157,23 +157,24 @@
             class="alert alert-danger mt-2 font-14"
             role="alert"
           >
-            {{ error_msg.form.error }}
+            {{ fields_label.form.error }}
           </div>
           <div
             *ngIf="apiError"
             class="alert alert-danger mt-2 font-14"
             role="alert"
           >
-            {{ error_msg.form.endpoint_error }}
+            {{ fields_label.form.endpoint_error }}
           </div>
           <div class="form-group">
             <button type="submit" id="submit" class="btn btn-primary btn-lg">
-              Sign Up
+              {{ fields_label.form.title }}
             </button>
           </div>
         </form>
         <div class="hint-text">
-          Already have an account? <a href="# ">Login here</a>
+          Already have an account?
+          <a href="javascript:void(0)" routerLink="/login">Login here</a>
         </div>
       </div>
     </div>

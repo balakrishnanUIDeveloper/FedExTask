@@ -1,4 +1,4 @@
-export const ERROR_FIELD_LABELS = {
+export const FORM_FIELDS_LABELS = {
   first_name: { label: 'First Name*', error: 'Please enter Valid Firstname' },
   last_name: { label: 'Last Name*', error: 'Please enter Valid Lastname' },
   email: { label: 'Email*', error: 'Please enter Valid email' },
@@ -15,6 +15,8 @@ export const ERROR_FIELD_LABELS = {
   },
   form: {
     error: 'Please enter all required fields',
-    endpoint_error: 'Something went wrong, try again later'
+    endpoint_error: 'Something went wrong, try again later',
+    title: 'Sign Up',
+    sub_title: 'Please fill in this form to create an account!'
   }
 };
