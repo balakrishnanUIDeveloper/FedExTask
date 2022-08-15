@@ -14,7 +14,7 @@
                   class="form-control"
                   name="firstName"
                   id="firstName"
-                  placeholder="First Name*"
+                  [placeholder]="error_msg.first_name.label"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
@@ -28,9 +28,10 @@
                     firstName.invalid &&
                     (firstName?.dirty || firstName?.touched)
                   "
-                  class="text-danger h6"
+                  class="alert alert-danger mt-2 font-14"
+                  role="alert"
                 >
-                  Please enter Valid Firstname
+                  {{ error_msg.first_name.error }}
                 </div>
               </div>
               <div class="col">
@@ -39,7 +40,7 @@
                   class="form-control"
                   name="lastName"
                   id="lastName"
-                  placeholder="Last Name*"
+                  [placeholder]="error_msg.last_name.label"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
@@ -50,9 +51,10 @@
                   *ngIf="
                     !lastName?.valid && (lastName?.dirty || lastName?.touched)
                   "
-                  class="text-danger h6"
+                  class="alert alert-danger mt-2 font-14"
+                  role="alert"
                 >
-                  Please enter Valid Lastname
+                  {{ error_msg.last_name.error }}
                 </div>
               </div>
             </div>
@@ -63,7 +65,7 @@
               class="form-control"
               name="email"
               id="email"
-              placeholder="Email*"
+              [placeholder]="error_msg.email.label"
               pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               required
               ngModel
@@ -71,9 +73,10 @@
             />
             <div
               *ngIf="!email?.valid && (email?.dirty || email?.touched)"
-              class="text-danger h6"
+              class="alert alert-danger mt-2 font-14"
+              role="alert"
             >
-              Please enter Valid email
+              {{ error_msg.email.error }}
             </div>
           </div>
           <div class="form-group">
@@ -82,7 +85,7 @@
               class="form-control"
               name="password"
               id="password"
-              placeholder="Password*"
+              [placeholder]="error_msg.password.label"
               required
               ngModel
               #password="ngModel"
@@ -92,19 +95,26 @@
             />
             <div
               *ngIf="!password?.valid && (password?.dirty || password?.touched)"
-              class="text-danger h6"
+              class="alert alert-danger mt-2 font-14"
+              role="alert"
             >
-              Please enter Valid password
+              {{ error_msg.password.error }}
+              <ul class="list font-weight-light">
+                <li *ngFor="let errorItems of error_msg.password.error_list">
+                  {{ errorItems }}
+                </li>
+              </ul>
             </div>
             <div
-              class="text-danger h6"
+              class="alert alert-danger mt-2 font-14"
+              role="alert"
               *ngIf="
                 password?.valid &&
                 (password?.value?.indexOf(firstName.value) >= 0 ||
                   password?.value?.indexOf(lastName.value) >= 0)
               "
             >
-              Password Should not contain user's first or last name.
+              {{ error_msg.password.no_name_error }}
             </div>
           </div>
           <div class="form-group">
@@ -126,25 +136,35 @@
                 !confirmPassword?.valid &&
                 (confirmPassword?.dirty || confirmPassword?.touched)
               "
-              class="text-danger h6"
+              class="alert alert-danger mt-2 font-14"
+              role="alert"
             >
-              Please enter Valid password
+              {{ error_msg.password.error }}
             </div>
             <div
-              class="text-danger h6"
+              class="alert alert-danger mt-2 font-14"
+              role="alert"
               *ngIf="
                 confirmPassword?.valid &&
                 confirmPassword.value !== password.value
               "
             >
-              confirm password Should be as same as the password
+              {{ error_msg.password.confirm_password }}
             </div>
           </div>
-          <div *ngIf="submitted && !signUpForm?.valid" class="text-danger h6">
-            Please enter all required fields
+          <div
+            *ngIf="submitted && !signUpForm?.valid"
+            class="alert alert-danger mt-2 font-14"
+            role="alert"
+          >
+            {{ error_msg.form.error }}
           </div>
-          <div *ngIf="apiError" class="text-danger h6">
-            Something went wrong, try again later
+          <div
+            *ngIf="apiError"
+            class="alert alert-danger mt-2 font-14"
+            role="alert"
+          >
+            {{ error_msg.form.endpoint_error }}
           </div>
           <div class="form-group">
             <button type="submit" id="submit" class="btn btn-primary btn-lg">

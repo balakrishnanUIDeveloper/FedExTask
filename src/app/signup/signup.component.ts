@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
-
+import { ERROR_FIELD_LABELS } from './signup.constants';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,6 +12,7 @@ export class SignupComponent {
   @ViewChild('signUpForm', { static: false }) signUpForm!: NgForm;
   submitted: boolean;
   apiError: boolean;
+  error_msg = ERROR_FIELD_LABELS;
   constructor(private _appService: AppService, private _router: Router) {
     this.submitted = false;
     this.apiError = false;
@@ -19,7 +20,7 @@ export class SignupComponent {
   onSubmit(signupForm: NgForm) {
     this.submitted = true;
     this.apiError = false;
-    if (signupForm.value) {
+    if (signupForm.value && signupForm.valid) {
       let formData = signupForm.value;
       let requestObj = {
         firstName: formData?.firstName,
