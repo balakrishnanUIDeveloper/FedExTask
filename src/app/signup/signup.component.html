@@ -1,0 +1,161 @@
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4 col-sm-6 col-xs-11 col">
+      <div class="signup-form">
+        <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" novalidate>
+          <h2>Sign Up</h2>
+          <p>Please fill in this form to create an account!</p>
+          <hr />
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="First Name*"
+                  pattern="^[a-zA-Z]+$"
+                  required
+                  ngModel
+                  #firstName="ngModel"
+                  minlength="3"
+                  maxlength="25"
+                />
+                <div
+                  id="errorFn"
+                  *ngIf="
+                    firstName.invalid &&
+                    (firstName?.dirty || firstName?.touched)
+                  "
+                  class="text-danger h6"
+                >
+                  Please enter Valid Firstname
+                </div>
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Last Name*"
+                  pattern="^[a-zA-Z]+$"
+                  required
+                  ngModel
+                  #lastName="ngModel"
+                  maxlength="25"
+                />
+                <div
+                  *ngIf="
+                    !lastName?.valid && (lastName?.dirty || lastName?.touched)
+                  "
+                  class="text-danger h6"
+                >
+                  Please enter Valid Lastname
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="Email*"
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              required
+              ngModel
+              #email="ngModel"
+            />
+            <div
+              *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+              class="text-danger h6"
+            >
+              Please enter Valid email
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="Password*"
+              required
+              ngModel
+              #password="ngModel"
+              pattern="^[a-zA-Z]+$"
+              minlength="8"
+              maxlength="25"
+            />
+            <div
+              *ngIf="!password?.valid && (password?.dirty || password?.touched)"
+              class="text-danger h6"
+            >
+              Please enter Valid password
+            </div>
+            <div
+              class="text-danger h6"
+              *ngIf="
+                password?.valid &&
+                (password?.value?.indexOf(firstName.value) >= 0 ||
+                  password?.value?.indexOf(lastName.value) >= 0)
+              "
+            >
+              Password Should not contain user's first or last name.
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="confirmPassword*"
+              required
+              ngModel
+              #confirmPassword="ngModel"
+              pattern="^[a-zA-Z]+$"
+              minlength="8"
+              maxlength="25"
+            />
+            <div
+              *ngIf="
+                !confirmPassword?.valid &&
+                (confirmPassword?.dirty || confirmPassword?.touched)
+              "
+              class="text-danger h6"
+            >
+              Please enter Valid password
+            </div>
+            <div
+              class="text-danger h6"
+              *ngIf="
+                confirmPassword?.valid &&
+                confirmPassword.value !== password.value
+              "
+            >
+              confirm password Should be as same as the password
+            </div>
+          </div>
+          <div *ngIf="submitted && !signUpForm?.valid" class="text-danger h6">
+            Please enter all required fields
+          </div>
+          <div *ngIf="apiError" class="text-danger h6">
+            Something went wrong, try again later
+          </div>
+          <div class="form-group">
+            <button type="submit" id="submit" class="btn btn-primary btn-lg">
+              Sign Up
+            </button>
+          </div>
+        </form>
+        <div class="hint-text">
+          Already have an account? <a href="# ">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
