@@ -135,6 +135,7 @@
               maxlength="25"
             />
             <div
+            id="confirmpassword_error"
               *ngIf="
                 !confirmPassword?.valid &&
                 (confirmPassword?.dirty || confirmPassword?.touched)

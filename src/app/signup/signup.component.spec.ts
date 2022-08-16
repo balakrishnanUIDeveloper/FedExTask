@@ -33,6 +33,9 @@ describe('SignupComponent', () => {
   afterEach(() => {
     fixture.destroy();
   });
+  afterEach(() => {
+    fixture.destroy();
+  });
   it('should create', () => {
     expect(component).toBeDefined();
   });
@@ -64,8 +67,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(firstName.value).toEqual('john');
       fixture.whenStable().then(() => {
-        const firstName = fixture.nativeElement.querySelector('#fn_error');
-        expect(firstName).toBeNull();
+        const fn_error = fixture.nativeElement.querySelector('#fn_error');
+        expect(fn_error).toBeNull();
       });
     });
     it('lastname should throw error when input value contains non alpahbetical characters', async () => {
@@ -77,8 +80,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(lastname.value).toEqual('john123');
       fixture.whenStable().then(() => {
-        const lastname = fixture.nativeElement.querySelector('#ln_error');
-        expect(lastname.innerHTML).toContain(
+        const ln_error = fixture.nativeElement.querySelector('#ln_error');
+        expect(ln_error.innerHTML).toContain(
           component.fields_label.last_name.error
         );
       });
@@ -92,8 +95,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(lastname.value).toEqual('john');
       fixture.whenStable().then(() => {
-        const lastname = fixture.nativeElement.querySelector('#ln_error');
-        expect(lastname).toBeNull();
+        const ln_error = fixture.nativeElement.querySelector('#ln_error');
+        expect(ln_error).toBeNull();
       });
     });
     it('email should throw error when input value contains non alpahbetical characters', async () => {
@@ -105,8 +108,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(email.value).toEqual('test@gmail');
       fixture.whenStable().then(() => {
-        const email = fixture.nativeElement.querySelector('#email_error');
-        expect(email.innerHTML).toContain(component.fields_label.email.error);
+        const email_error = fixture.nativeElement.querySelector('#email_error');
+        expect(email_error.innerHTML).toContain(component.fields_label.email.error);
       });
     });
     it('email should not throw error when input value contains non alpahbetical characters', async () => {
@@ -118,8 +121,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(email.value).toEqual('test@gmail.com');
       fixture.whenStable().then(() => {
-        const email = fixture.nativeElement.querySelector('#email_error');
-        expect(email).toBeNull();
+        const email_error = fixture.nativeElement.querySelector('#email_error');
+        expect(email_error).toBeNull();
       });
     });
     it('password should throw error when input value contains invalid characters', async () => {
@@ -131,8 +134,8 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(password.value).toEqual('test@');
       fixture.whenStable().then(() => {
-        const password = fixture.nativeElement.querySelector('#password_error');
-        expect(password.innerHTML).toContain(
+        const password_error = fixture.nativeElement.querySelector('#password_error');
+        expect(password_error.innerHTML).toContain(
           component.fields_label.password.error
         );
       });
@@ -146,8 +149,28 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect(password.value).toEqual('abcdefghij');
       fixture.whenStable().then(() => {
-        const password = fixture.nativeElement.querySelector('#password_error');
-        expect(password).toBeNull();
+        const password_error = fixture.nativeElement.querySelector('#password_error');
+        expect(password_error).toBeNull();
+      });
+    });
+    it("confirm password should throw error when it doesn't match with password field" , async () => {
+      fixture.detectChanges();
+      const password = fixture.nativeElement.querySelector('#password');
+      password.value = 'abcdefghij';
+      password.dispatchEvent(new InputEvent('focus'));
+      password.dispatchEvent(new InputEvent('blur'));
+
+      const confirmPassword = fixture.nativeElement.querySelector('#confirmPassword');
+      confirmPassword.value = 'testdataabc';
+      confirmPassword.dispatchEvent(new InputEvent('focus'));
+      confirmPassword.dispatchEvent(new InputEvent('blur'));
+
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        const confirmpassword_error = fixture.nativeElement.querySelector('#confirmpassword_error');
+        expect(confirmpassword_error.innerHTML).toContain(
+          component.fields_label.password.error
+        );
       });
     });
   });
