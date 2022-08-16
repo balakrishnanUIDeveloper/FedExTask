@@ -33,6 +33,9 @@ describe('SignupComponent', () => {
   afterEach(() => {
     fixture.destroy();
   });
+  afterEach(() => {
+    fixture.destroy();
+  });
   it('should create', () => {
     expect(component).toBeDefined();
   });
