@@ -23,7 +23,7 @@
                   maxlength="25"
                 />
                 <div
-                  id="errorFn"
+                  id="fn_error"
                   *ngIf="
                     firstName.invalid &&
                     (firstName?.dirty || firstName?.touched)
@@ -48,6 +48,7 @@
                   maxlength="25"
                 />
                 <div
+                  id="ln_error"
                   *ngIf="
                     !lastName?.valid && (lastName?.dirty || lastName?.touched)
                   "
@@ -72,6 +73,7 @@
               #email="ngModel"
             />
             <div
+              id="email_error"
               *ngIf="!email?.valid && (email?.dirty || email?.touched)"
               class="alert alert-danger mt-2 font-14"
               role="alert"
@@ -94,6 +96,7 @@
               maxlength="25"
             />
             <div
+              id="password_error"
               *ngIf="!password?.valid && (password?.dirty || password?.touched)"
               class="alert alert-danger mt-2 font-14"
               role="alert"
