@@ -19,6 +19,8 @@
 * Responsive Design - used Bootstrap 4.2
 * signup page with all the above mentioned fields
 * 404 page for unknown pages
+* added .npmrc incase if you common npmrc registry is different, so that can install dependencies easily.
+* on success of signup I have routed to a new page which will show a message 'signup success'.
 
 ## Development server
 
@@ -44,3 +46,4 @@ Balakrishnan
 
 * JenkinsFile for CI/ CD pipeline.
 * SonarQube setup
+* After singup we can actually show the login page instead of routing them to new page
