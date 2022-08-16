@@ -10,7 +10,7 @@ describe('SignupComponent', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     const routerStub = () => ({ navigateByUrl: (a: any) => ({}) });
     const appServiceStub = () => ({
       sendSignupData: (a: any) => ({
@@ -25,11 +25,14 @@ describe('SignupComponent', () => {
         { provide: Router, useFactory: routerStub },
         { provide: AppService, useFactory: appServiceStub }
       ]
-    });
+    }).compileComponents();
     fixture = TestBed.createComponent(SignupComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-
+  it('should create', () => {
+    expect(component).toBeDefined();
+  });
   it('can load instance', () => {
     expect(component).toBeTruthy();
   });
@@ -41,19 +44,6 @@ describe('SignupComponent', () => {
       firstName.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
       expect(firstName.nativeElement.value).toContain('john');
-    });
-  });
-  it('check password validation', async () => {
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const password = fixture.debugElement.query(By.css('#password'));
-      password.nativeElement.dispatchEvent(new Event('focus'));
-      password.nativeElement.dispatchEvent(new Event('blue'));
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        const error = fixture.debugElement.query(By.css('.h6'));
-        expect(error.nativeElement.innerHTML).toBeDefined();
-      });
     });
   });
   describe('onSubmit', () => {
